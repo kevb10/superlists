@@ -7,3 +7,8 @@ class HomePageTest(TestCase):
     def test_root_url_resolvers_to_home_page_view(self):
         found = resolve('/')
         self.assertEqual(found.func, home_page)
+
+    def test_home_page_returns_corrent_html(self):
+        request = HttpRequest()
+        response = home_page(request)
+        self.AssertIn(response.content.startswith(b'<title>To-Do lists</title>', response.content))
